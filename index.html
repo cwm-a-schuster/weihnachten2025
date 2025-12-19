@@ -318,7 +318,7 @@
     overlay.style.transform = 'translate(-50%, -50%)';
     overlay.style.backgroundColor = '#b11226'; // kräftiges Rot
     overlay.style.color = '#fff';
-    overlay.style.padding = '30px 40px';
+    overlay.style.padding = '20px 20px';
     overlay.style.border = '3px solid #fff';
     overlay.style.borderRadius = '8px';
     overlay.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
@@ -327,9 +327,11 @@
     overlay.style.textAlign = 'center';
     overlay.style.lineHeight = '1.4';
     overlay.style.zIndex = '9999';
+    overlay.style.width = '80%';
+    
     overlay.style.opacity = '0'; // für Fade-In
     overlay.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    overlay.innerHTML = `⚠️ Error<br/> ${text}`; // Icon für Fehlermeldung
+    overlay.innerHTML = `⚠️ Error <br/> <span>${text}</span>`; // Icon für Fehlermeldung
 
     // Overlay hinzufügen
     document.body.appendChild(overlay);
