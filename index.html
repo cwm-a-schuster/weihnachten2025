@@ -9,7 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            min-height: 100vh;
+            
             margin: 0;
             overflow-x: hidden;
             color: #fff;
@@ -112,6 +112,7 @@
         @media (max-width: 768px) {
             body {
                 display: block; /* ⬅️ DAS ist der entscheidende Fix */
+                min-height: auto;
             }
 
             .container {
