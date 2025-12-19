@@ -169,7 +169,7 @@
     </div>
 
     <div class="hint" id="hint">
-        Klick auf das Geschenk, um deine Überraschung zu öffnen
+        Klick auf das Geschenk, um deine Überraschung zu erhalten
     </div>
 </div>
 
@@ -276,7 +276,7 @@
         
 
         const now = new Date();
-        const target = new Date('2025-12-18T19:00:00'); // 19.12.2025 19:00 Uhr
+        const target = new Date('2025-12-19T19:00:00'); // 19.12.2025 19:00 Uhr
         if (now >= target) {
             const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
             await showSloganFullscreen(randomSlogan);
