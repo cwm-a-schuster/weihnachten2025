@@ -111,7 +111,8 @@
         /* 📱 MOBILE – Flexbox deaktivieren */
         @media (max-width: 768px) {
             body {
-                
+                display: block; /* ⬅️ DAS ist der entscheidende Fix */
+                min-height: auto;
             }
 
             .container {
