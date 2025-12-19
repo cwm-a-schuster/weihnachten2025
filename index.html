@@ -50,10 +50,34 @@
             transform: scale(1.15);
         }
 
+        .slogan {
+            margin-top: 25px;
+            font-size: 18px;
+            font-style: italic;
+            display: none;
+            line-height: 1.5;
+        }
+
         .code {
             
             display: none;
             
+        }
+
+        .copy-btn {
+            margin-top: 18px;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #336699;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+        }
+
+        .copy-btn.copied {
+            background: #2ecc71;
         }
 
         .code span.rabattcode{
@@ -124,17 +148,19 @@
 
     </div>
     <div id="gift" class="gift">🎁</div>
-    
+    <div id="slogan" class="slogan"></div>
+
     <div id="code" class="code">
     <h2>Rabattcode</h2>
-    <span class="rabattcode">TEAMWORK</span>
+    <span class="rabattcode" id="rabattcode">TEAMWORK</span>
+    <div style="text-align: center;"><button id="copyBtn" class="copy-btn">Kopieren</button></div>
     <span class="info">
     <p><strong>Schöne Weihnachten!</strong></p>    
     <p>Ein kleines Dankeschön zum Jahresende.<br/> 
     Mit dem Rabattcode <strong>TEAMWORK</strong><br/>
     sparst Du einmalig 50 € im Onlineshop <br/>
-    www.cw-mobile.de</p>
-
+    <a style="color:#555;" href="https://www.cw-mobile.de">www.cw-mobile.de</a></p>
+ 
     </span>
     
     <span class="vat">* Aufgrund steuerlicher Anforderungen bitte folgende Einschränkungen beachten: <br/>
@@ -142,7 +168,7 @@
     </span>
     </div>
 
-    <div class="hint">
+    <div class="hint" id="hint">
         Klick auf das Geschenk, um deine Überraschung zu öffnen
     </div>
 </div>
@@ -191,12 +217,143 @@
 
     setInterval(snow, 33);
 
+    /* 🎁 Weihnachts-Sprüche für E-Commerce Mitarbeiter */
+    const slogans = [
+    // SAP
+    "Fehler 404: Dein Bestellauftrag ist gerade auf Weltreise in SAP.",
+    "Systemabsturz: SAP denkt gerade über den Sinn des Lebens nach.",
+    "Achtung! Dein Einkaufswagen hängt im SAP-Transportauftrag fest.",
+    "SAP meldet: Kaffee leer – System schläft ein.",
+    "Warnung: SAP konnte dein Dokument nicht finden, es versteckt sich wahrscheinlich hinter einem Customizing.",
+
+    // Telefonanlage
+    "Fehler: Alle Leitungen besetzt – versuche es in einem Paralleluniversum.",
+    "Telefonie gestört: Mitarbeiter antwortet gerade mit Rauchzeichen.",
+    "Leitung nicht verfügbar – bitte Kabel entwirren und erneut starten.",
+    "Kein Signal: Deine VoIP-Leitung macht gerade Mittagsschlaf.",
+    "ACHTUNG: Hotline verwechselt gerade Klingelton mit Klingelstreifen.",
+
+    // Microsoft / Windows
+    "Bluescreen incoming: Dein PC möchte ein Weihnachtslied singen.",
+    "Fehler 0xDEADBEEF – Microsoft fragt sich, warum du schon wieder klickst.",
+    "Word konnte die Datei nicht öffnen, weil sie gerade Urlaub macht.",
+    "Outlook denkt gerade über das Ende des Jahres nach – keine Mails verfügbar.",
+    "Windows Update hängt – es zählt die Schneeflocken draußen.",
+
+    // DHL / Versand
+    "Lieferung verzögert: Paket macht Sightseeing in Hamburg.",
+    "Tracking offline: Dein Paket trinkt gerade Glühwein in der Werkstatt.",
+    "Achtung: Paket ist abgehauen – bitte Jagdschein bereithalten.",
+    "Fehler 500: Paket steckt in der Weihnachtsstraße fest.",
+    "Warnung: DHL-Mitarbeiter tanzt gerade um das Lagerfeuer – Lieferung verzögert sich.",
+
+    // Allgemein IT / Büro
+    "Systemfehler: Kaffeemaschine verweigert weitere Aufträge.",
+    "Fehler: Drucker denkt, er sei ein Scanner. Bitte neu starten.",
+    "ACHTUNG: Maus wurde von Katze entführt – keine Klicks möglich.",
+    "Server down: Er macht gerade Mittagspause.",
+    "Fehler: Dein Passwort hat Urlaub genommen.",
+
+    // Fachhandel
+    "Fehler 404: Dein Beratungsgespräch ist gerade im Weihnachtsstress verschwunden.",
+    "Warnung: Regal neu sortiert – Kunden stehen draußen im Schneetreiben.",
+    "Achtung: Kasse überlastet – Schokolade ist schneller als der Scanner.",
+    "Systemfehler: Verkaufsgespräch läuft aus dem Ruder – Kunde glücklich, Lager leer.",
+    "Hinweis: Fachhandel-Mitarbeiter tanzt gerade um den Christbaum.",
+    "Fehler: Inventur hat Überstunden – bitte Glühwein anbieten.",
+    "Warnung: Beratungsgespräch unterbrochen – Kunde sucht nach dem letzten Geschenk.",
+    "Systemmeldung: Paket liegt falsch – Kunde wartet ungeduldig auf die Überraschung.",
+    "Fehler: Kassensystem fragt nach Weihnachtswünschen.",
+    "Achtung: Verkaufstalente überfordert – Weihnachtsstress aktiviert."
+];
+
+    const sloganEl = document.getElementById("slogan");
+    const codeEl = document.getElementById("code");
+    const copyBtn = document.getElementById("copyBtn");
+
     /* 🎁 Reveal */
-    document.getElementById("gift").onclick = () => {
+    document.getElementById("gift").onclick = async() => {
+        
+
+        const now = new Date();
+        const target = new Date('2025-12-18T19:00:00'); // 19.12.2025 19:00 Uhr
+        if (now >= target) {
+            const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
+            await showSloganFullscreen(randomSlogan);
+        }
         gift.style.display = "none";
+        hint.style.display ="none";
         page1.style.display ="none";
         code.style.display = "block";
+
+        sloganEl.style.display = "block";
+        copyBtn.style.display = "inline-block";
+
     };
+    /* 📋 Copy Button */
+    copyBtn.onclick = async () => {
+        try {
+            await navigator.clipboard.writeText(rabattcode.textContent);
+            copyBtn.textContent = "Kopiert";
+            copyBtn.classList.add("copied");
+
+            setTimeout(() => {
+                copyBtn.textContent = "Code kopieren";
+                copyBtn.classList.remove("copied");
+            }, 2000);
+        } catch {
+            alert("Kopieren nicht möglich");
+        }
+    };
+
+
+    function showSloganFullscreen(text) {
+     // Overlay erstellen
+      return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.id = 'errorSlogan';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '50%';
+    overlay.style.left = '50%';
+    overlay.style.transform = 'translate(-50%, -50%)';
+    overlay.style.backgroundColor = '#b11226'; // kräftiges Rot
+    overlay.style.color = '#fff';
+    overlay.style.padding = '30px 40px';
+    overlay.style.border = '3px solid #fff';
+    overlay.style.borderRadius = '8px';
+    overlay.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+    overlay.style.fontSize = '1.8rem';
+    overlay.style.fontWeight = 'bold';
+    overlay.style.textAlign = 'center';
+    overlay.style.lineHeight = '1.4';
+    overlay.style.zIndex = '9999';
+    overlay.style.opacity = '0'; // für Fade-In
+    overlay.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    overlay.innerHTML = `⚠️ Error<br/> ${text}`; // Icon für Fehlermeldung
+
+    // Overlay hinzufügen
+    document.body.appendChild(overlay);
+
+    // Fade-In und leichtes Aufpoppen
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+        overlay.style.transform = 'translate(-50%, -50%) scale(1.05)';
+    });
+
+    // Nach 9 Sekunden Fade-Out starten
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'translate(-50%, -50%) scale(0.95)';
+    }, 9000);
+
+    // Nach 10 Sekunden Overlay entfernen
+    setTimeout(() => {
+        overlay.remove();
+         resolve();
+    }, 6000);
+
+    });
+}
 </script>
 
 </body>
