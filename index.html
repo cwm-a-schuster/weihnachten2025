@@ -86,7 +86,7 @@
             margin-bottom: 20px;
             font-size: 26px;
             background-color: #ddd;
-            padding: .5rem;
+            padding: .8rem;
             font-weight: bold;
         }
 
@@ -134,10 +134,10 @@
 
 <div class="container">
 
-    <h1>#teamwensauer</h1>
+    
     
     <div id="page1">
-    <p>Danke für ein bewegtes Jahr 2025</p>
+    <h1>Danke für ein bewegtes Jahr 2025</h1>
     <p>Dieses Jahr war kein Spaziergang – es brachte Erfolge, aber auch Herausforderungen, stationär wie online. Wir durften neue, großartige Kolleginnen und Kollegen begrüßen und gemeinsam viel bewegen.</p>
  
 <p>Zum Jahresende möchten wir <strong>DANKE</strong> sagen: Danke für Deine Einsatzbereitschaft, Dein Engagement und Deine Loyalität.</p>
@@ -160,7 +160,7 @@
     <p>Ein kleines Dankeschön zum Jahresende.<br/> 
     Mit dem Rabattcode <strong>TEAMWORK</strong><br/>
     sparst Du einmalig 50 € im Onlineshop <br/>
-    <a style="color:#555;" href="https://www.cw-mobile.de">www.cw-mobile.de</a></p>
+    <a style="color:#555;" href="https://www.cw-mobile.de" target="_blank">www.cw-mobile.de</a></p>
  
     </span>
     
@@ -279,8 +279,8 @@
         const now = new Date();
         const target = new Date('2025-12-19T19:00:00'); // 19.12.2025 19:00 Uhr
         if (now >= target) {
-            const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
-            await showSloganFullscreen(randomSlogan);
+            /*const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
+            await showSloganFullscreen(randomSlogan);*/
         }
         gift.style.display = "none";
         hint.style.display ="none";
